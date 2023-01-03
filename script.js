@@ -1,5 +1,9 @@
 "use strict";
 
+//DOM elements
+const buttons = document.querySelectorAll(`.buttons`);
+const display = document.querySelector(`.display`);
+
 // functions for math operators
 const add = function (x, y) {
   return x + y;
@@ -31,3 +35,10 @@ function operate(operator, num1, num2) {
 }
 
 console.log(operate(`-`, 7, 3));
+
+// Function to handle button click
+buttons.addEventListener(`click`, function (e) {
+  if (e.target && e.target.class == "btn-1") {
+    console.log(e.target.class + "was clicked");
+  }
+});

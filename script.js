@@ -1,20 +1,23 @@
 "use strict";
 
 // Stored values
-let displayValue = ``;
+let displayValue = ``; // Maybe wont use
 
 let preNumber = ``;
-let postNumber = ``;
+let currentNumber = ``;
 let operator = ``;
 
+//DOM elements
 const currentDisplayNumber = document.querySelector(`.currentNumber`);
 const previousDisplayNumber = document.querySelector(`.previousNumber`);
 
-//DOM elements
 const numberButtons = document.querySelectorAll(`.number`);
 const operators = document.querySelectorAll(`.operator`);
 
 const display = document.querySelector(`.display`);
+
+const equals = document.querySelector(`.equals`);
+equals.addEventListener(`click`, calculate);
 
 // functions for math operators
 const add = function (x, y) {
@@ -31,19 +34,17 @@ const divide = function (x, y) {
 };
 
 // Function that takes an operator and 2 numbers and then calls one of the operator functions on the numbers
-function operate(operator, num1, num2) {
-  if (operator === `+`) {
-    return add(num1, num2);
-  } else if (operator === `-`) {
-    return subtract(num1, num2);
-  } else if (operator === `*`) {
-    return multiply(num1, num2);
-  } else if (operator === `/`) {
-    return divide(num1, num2);
-  }
-}
-
-console.log(operate(`-`, 7, 3));
+// function operate(operator, num1, num2) {
+//   if (operator === `+`) {
+//     return add(num1, num2);
+//   } else if (operator === `-`) {
+//     return subtract(num1, num2);
+//   } else if (operator === `*`) {
+//     return multiply(num1, num2);
+//   } else if (operator === `/`) {
+//     return divide(num1, num2);
+//   }
+// }
 
 // Number button click event handler
 numberButtons.forEach((btn) => {
@@ -54,39 +55,40 @@ numberButtons.forEach((btn) => {
 
 // Function to handle number button clicks
 function handleNumber(number) {
-  preNumber += number;
-  currentDisplayNumber.textContent = preNumber;
-  console.log(preNumber);
+  currentNumber += number;
+  currentDisplayNumber.textContent = currentNumber;
 }
 
 // Operator button click event handler
-function operatorClick() {
-  operators.forEach((btn) => {
-    btn.addEventListener(`click`, (e) => {
-      handleOperator(e.target.textContent);
-      if (
-        e.target.id == `add` ||
-        e.target.textContent == `-` ||
-        e.target.textContent == `*` ||
-        e.target.textContent == `/`
-      ) {
-        preNumber = displayValue;
-        display.textContent = e.target.textContent;
-        console.log(preNumber);
-      }
-      // function call for equals
-      if (e.target.textContent == `=`) {
-        operate(operation);
-      }
-    });
+operators.forEach((btn) => {
+  btn.addEventListener(`click`, (e) => {
+    handleOperator(e.target.textContent);
+    operator = e.target.textContent;
   });
-}
-operatorClick();
+});
 
 // function to store number when operator button is clicked
-function handleOperator(operator) {
-  preNumber = displayValue;
-  console.log(operator);
+function handleOperator(op) {
+  operator = op;
+  preNumber = currentNumber;
+  previousDisplayNumber.textContent = preNumber + ` ` + operator;
+  currentNumber = "";
+  currentDisplayNumber.textContent = "";
 }
 
-console.log(displayValue);
+function calculate() {
+  preNumber = Number(preNumber);
+  currentNumber = Number(currentNumber);
+
+  if (operator === `+`) {
+    preNumber += currentNumber;
+  } else if (operator === `-`) {
+    preNumber -= currentNumber;
+  } else if (operator === `*`) {
+    preNumber *= currentNumber;
+  } else if (operator === `/`) {
+    preNumber /= currentNumber;
+  }
+  previousDisplayNumber.textContent = ``;
+  currentDisplayNumber.textContent = preNumber;
+}

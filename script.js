@@ -3,10 +3,12 @@
 // Stored values
 let displayValue = ``;
 
-let preOperant = 0;
-let postOperant = ``;
+let preNumber = ``;
+let postNumber = ``;
+let operator = ``;
 
-let operation;
+const currentDisplayNumber = document.querySelector(`.currentNumber`);
+const previousDisplayNumber = document.querySelector(`.previousNumber`);
 
 //DOM elements
 const numberButtons = document.querySelectorAll(`.number`);
@@ -52,9 +54,9 @@ numberButtons.forEach((btn) => {
 
 // Function to handle number button clicks
 function handleNumber(number) {
-  displayValue += number;
-  display.textContent = displayValue;
-  console.log(displayValue);
+  preNumber += number;
+  currentDisplayNumber.textContent = preNumber;
+  console.log(preNumber);
 }
 
 // Operator button click event handler
@@ -63,16 +65,18 @@ function operatorClick() {
     btn.addEventListener(`click`, (e) => {
       handleOperator(e.target.textContent);
       if (
-        e.target.textContent == `+` ||
+        e.target.id == `add` ||
         e.target.textContent == `-` ||
         e.target.textContent == `*` ||
         e.target.textContent == `/`
       ) {
-        console.log(`operator key pressed`);
+        preNumber = displayValue;
+        display.textContent = e.target.textContent;
+        console.log(preNumber);
       }
       // function call for equals
-      else if (e.target.textContent == `=`) {
-        operate();
+      if (e.target.textContent == `=`) {
+        operate(operation);
       }
     });
   });
@@ -81,10 +85,8 @@ operatorClick();
 
 // function to store number when operator button is clicked
 function handleOperator(operator) {
-  preOperant = displayValue;
+  preNumber = displayValue;
   console.log(operator);
-  console.log(preOperant);
 }
 
 console.log(displayValue);
-console.log(preOperant);

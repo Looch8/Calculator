@@ -49,8 +49,8 @@ numberButtons.forEach((btn) => {
 
 // Function to handle number button clicks
 function handleNumber(number) {
-  display.textContent += number;
   displayValue += number;
+  display.textContent = displayValue;
   console.log(displayValue);
 }
 

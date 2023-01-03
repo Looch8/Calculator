@@ -2,8 +2,11 @@
 
 // Stored values
 let displayValue = ``;
+
 let preOperant = 0;
 let postOperant = ``;
+
+let operation;
 
 //DOM elements
 const numberButtons = document.querySelectorAll(`.number`);
@@ -55,11 +58,26 @@ function handleNumber(number) {
 }
 
 // Operator button click event handler
-operators.forEach((btn) => {
-  btn.addEventListener(`click`, (e) => {
-    handleOperator(e.target.textContent);
+function operatorClick() {
+  operators.forEach((btn) => {
+    btn.addEventListener(`click`, (e) => {
+      handleOperator(e.target.textContent);
+      if (
+        e.target.textContent == `+` ||
+        e.target.textContent == `-` ||
+        e.target.textContent == `*` ||
+        e.target.textContent == `/`
+      ) {
+        console.log(`operator key pressed`);
+      }
+      // function call for equals
+      else if (e.target.textContent == `=`) {
+        operate();
+      }
+    });
   });
-});
+}
+operatorClick();
 
 // function to store number when operator button is clicked
 function handleOperator(operator) {

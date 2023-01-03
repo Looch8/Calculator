@@ -1,6 +1,6 @@
 "use strict";
 
-let displayValue = 0;
+let displayValue = ``;
 
 //DOM elements
 const numberButtons = document.querySelectorAll(`.number`);
@@ -40,12 +40,18 @@ function operate(operator, num1, num2) {
 
 console.log(operate(`-`, 7, 3));
 
-// Function to handle button click
+// button click event handler
 numberButtons.forEach((btn) => {
   btn.addEventListener(`click`, (e) => {
     handleNumber(e.target.textContent);
   });
 });
+
+// Function to handle number button clicks
 function handleNumber(number) {
-  console.log(number);
+  display.textContent += number;
+  displayValue += number;
+  console.log(displayValue);
 }
+
+console.log(displayValue);

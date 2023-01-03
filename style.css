@@ -6,6 +6,9 @@
 .calculator {
   display: grid;
   grid-template-rows: 1fr 4fr;
+  max-width: 350px;
+  height: 500px;
+  margin: auto;
 }
 
 .buttons {

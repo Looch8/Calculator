@@ -1,6 +1,9 @@
 "use strict";
 
+// Stored values
 let displayValue = ``;
+let preOperant = 0;
+let postOperant = ``;
 
 //DOM elements
 const numberButtons = document.querySelectorAll(`.number`);
@@ -12,15 +15,12 @@ const display = document.querySelector(`.display`);
 const add = function (x, y) {
   return x + y;
 };
-
 const subtract = function (x, y) {
   return x - y;
 };
-
 const multiply = function (x, y) {
   return x * y;
 };
-
 const divide = function (x, y) {
   return x / y;
 };
@@ -40,7 +40,7 @@ function operate(operator, num1, num2) {
 
 console.log(operate(`-`, 7, 3));
 
-// button click event handler
+// Number button click event handler
 numberButtons.forEach((btn) => {
   btn.addEventListener(`click`, (e) => {
     handleNumber(e.target.textContent);
@@ -54,4 +54,19 @@ function handleNumber(number) {
   console.log(displayValue);
 }
 
+// Operator button click event handler
+operators.forEach((btn) => {
+  btn.addEventListener(`click`, (e) => {
+    handleOperator(e.target.textContent);
+  });
+});
+
+// function to store number when operator button is clicked
+function handleOperator(operator) {
+  preOperant = displayValue;
+  console.log(operator);
+  console.log(preOperant);
+}
+
 console.log(displayValue);
+console.log(preOperant);

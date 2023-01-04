@@ -19,6 +19,9 @@ const display = document.querySelector(`.display`);
 const equals = document.querySelector(`.equals`);
 equals.addEventListener(`click`, calculate);
 
+const clear = document.querySelector(`.clear`);
+clear.addEventListener(`click`, clearNumber);
+
 // functions for math operators
 const add = function (x, y) {
   return x + y;
@@ -91,4 +94,11 @@ function calculate() {
   }
   previousDisplayNumber.textContent = ``;
   currentDisplayNumber.textContent = preNumber;
+}
+
+function clearNumber() {
+  preNumber = ``;
+  currentNumber = ``;
+  previousDisplayNumber.textContent = ``;
+  currentDisplayNumber.textContent = ``;
 }

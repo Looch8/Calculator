@@ -57,11 +57,24 @@ operators.forEach((btn) => {
 
 // function to store number when operator button is clicked
 function handleOperator(op) {
-  operator = op;
-  preNumber = currentNumber;
+  if (preNumber === ``) {
+    preNumber = currentNumber;
+    operatorString(op);
+  } else if (currentNumber === ``) {
+    operatorString(op);
+  } else {
+    calculate();
+    operator = op;
+    currentDisplayNumber.textContent = ``;
+    previousDisplayNumber.textContent = preNumber + ` ` + operator;
+  }
+}
+
+function operatorString(text) {
+  operator = text;
   previousDisplayNumber.textContent = preNumber + ` ` + operator;
-  currentNumber = "";
   currentDisplayNumber.textContent = "";
+  currentNumber = ``;
 }
 
 function calculate() {
